@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>second</title>
+<title>중고나라</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -21,7 +21,7 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+	<nav class="navbar navbar-expand-md bg-light navbar-dark fixed-top">
 		<a class="navbar-brand" href="/second/index.jsp">Second</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
@@ -33,22 +33,26 @@
 				<c:choose>
 					<c:when test="${empty sessionScope.principal}">
 						
-						<li class="nav-item"><a class="nav-link" href="/blog/user?cmd=login">로그인</a></li>
-						<li class="nav-item"><a class="nav-link" href="/blog/user?cmd=join">회원가입</a></li>
+						<li class="nav-item"><a class="nav-link" href="/second/member?cmd=login">로그인</a></li>
+						<li class="nav-item"><a class="nav-link" href="/second/member?cmd=join">회원가입</a></li>
 						<form class="form-inline" action="#">
+						
     					<input class="form-control mr-sm-2" type="text" placeholder="상품을 검색해 주세요">
    						<button class="btn btn-success" type="submit">검색</button>
    						</form>
   
 					</c:when>
 					<c:otherwise>
-						<li class="nav-item"><a class="nav-link" href="/blog/board?cmd=write">자유게시판</a></li>
-						<li class="nav-item"><a class="nav-link" href="/blog/user?cmd=update">회원정보</a></li>
-						<li class="nav-item"><a class="nav-link" href="/blog/user?cmd=logout">로그아웃</a></li>
 						<form class="form-inline" action="#">
-    					<input class="form-control mr-sm-2" type="text" placeholder="Search">
-   						<button class="btn btn-success" type="submit">Search</button>
+    						<input class="form-control mr-sm-2" type="text" placeholder="Search">
+   							<button class="btn btn-success" type="submit">Search</button>
    						</form>
+						<li class="nav-item"><a class="nav-link" href="/second/product?cmd=pwrite">상품등록</a></li>
+						<li class="nav-item"><a class="nav-link" href="/second/member?cmd=update">회원정보</a></li>
+						<li class="nav-item"><a class="nav-link" href="/second/board?cmd=update">자유게시판</a></li>
+						<li class="nav-item"><a class="nav-link" href="/second/user?cmd=update">회원정보</a></li>
+						<li class="nav-item"><a class="nav-link" href="/second/user?cmd=logout">로그아웃</a></li>
+						
 					</c:otherwise>
 				</c:choose>
 			</ul>

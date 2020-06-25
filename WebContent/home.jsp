@@ -26,16 +26,16 @@
 				</tr>
 				<tr>
 					<td align="center">
-						<img src="./image/test.jpg" style="max-width: 100%; height: auto;">1<br/>조현사진<br/>10000원
+						<img src="./image/test.jpg" style="max-width: 100%; height: auto;">1<br/>사진1<br/>10000원
 					</td>
 					<td align="center">
-						<img src="./image/test.jpg" style="max-width: 100%; height: auto;">2<br/>조현사진<br/>10000원
+						<img src="./image/test.jpg" style="max-width: 100%; height: auto;">2<br/>사진2<br/>10000원
 					</td>
 					<td align="center">
-						<img src="./image/test.jpg" style="max-width: 100%; height: auto;">3<br/>조현사진<br/>10000원
+						<img src="./image/test.jpg" style="max-width: 100%; height: auto;">3<br/>사진3<br/>10000원
 					</td>
 					<td align="center">
-						<img src="./image/test.jpg" style="max-width: 100%; height: auto;">4<br/>조현사진<br/>10000원
+						<img src="./image/test.jpg" style="max-width: 100%; height: auto;">4<br/>사진4<br/>10000원
 					</td>
 					
 				</tr>

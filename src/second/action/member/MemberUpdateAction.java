@@ -21,8 +21,7 @@ public class MemberUpdateAction implements Action {
 			return; // 여기서 return이 었으면 코드를 아래를 타고 내려간다.
 		}
 		
-		RequestDispatcher dis = 
-				request.getRequestDispatcher("user/update.jsp");
+		RequestDispatcher dis = request.getRequestDispatcher("user/update.jsp");
 		dis.forward(request, response);
 	}
 }

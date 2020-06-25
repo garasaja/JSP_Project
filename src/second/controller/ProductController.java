@@ -10,15 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import second.action.Action;
 import second.action.member.MemberJoinAction;
-import second.action.member.MemberJoinProcAction;
-import second.action.member.MemberLoginAction;
-import second.action.member.MemberLoginProcAction;
-import second.action.member.MemberLogoutAction;
-import second.action.member.MemberProfileUploadAction;
-import second.action.member.MemberProfileUploadProcAction;
-import second.action.member.MemberUpdateAction;
-import second.action.member.MemberUpdateProcAction;
-import second.action.member.MemberUsernameCheckAction;
+import second.action.product.ProductDetailAction;
+import second.action.product.ProductRegisterAction;
+import second.action.product.ProductRegisterProcAction;
+import second.action.product.ProductUpdateAction;
+import second.action.product.ProductUpdateProcAction;
 
 
 // http://localhost:8000/blog/user
@@ -48,9 +44,18 @@ public class ProductController extends HttpServlet {
 	}
 	
 	public Action router(String cmd) {
-		if(cmd.equals("home")) {
-			// 회원가입 페이지로 이동
+		if(cmd.equals("home")) {			
 			return new MemberJoinAction();
+		}else if(cmd.equals("register")) {			
+			return new ProductRegisterAction();
+		}else if(cmd.equals("registerProc")) {			
+			return new ProductRegisterProcAction();
+		}else if(cmd.equals("update")) {			
+			return new ProductUpdateAction();
+		}else if(cmd.equals("updateProc")) {			
+			return new ProductUpdateProcAction();
+		}else if(cmd.equals("detail")) {			
+			return new ProductDetailAction();
 		}
 		return null;
 	}
