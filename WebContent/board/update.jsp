@@ -3,7 +3,7 @@
 <%@ include file="../include/nav.jsp"%>
 
 <%@ include file="../include/authentication.jsp"%>
-
+<br/><br/><br/><br/><br/><br/><br/><br/>
 <div class="container">
 	<form action="/blog/board?cmd=updateProc" method="POST">
 	

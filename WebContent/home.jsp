@@ -1,13 +1,13 @@
 <%@page import="java.io.PrintWriter"%>
-<%@page import="second.model.Member"%>
+<%@page import="com.cos.blog.model.Users"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="include/nav.jsp"%>
-
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <div class="container">
 
-	<div class="m-1">
-		<form class="form-inline d-flex justify-content-end" action="/second/product">
+	<div class="m-2">
+		<form class="form-inline d-flex justify-content-end" action="/blog/board">
 			<input type="hidden" name="cmd" value="search" />
 			<input type="hidden" name="page" value="0" />
 			
@@ -17,34 +17,21 @@
 		</form>
 	</div>
 
-	
-			<table width="1000">
-				<tr height="100">
-					<td align="center" colspan="4">
-						<font size="6" color="black">상품보기</font>
-					</td>
-				</tr>
-				<tr>
-					<td align="center">
-						<img src="./image/test.jpg" style="max-width: 100%; height: auto;">1<br/>사진1<br/>10000원
-					</td>
-					<td align="center">
-						<img src="./image/test.jpg" style="max-width: 100%; height: auto;">2<br/>사진2<br/>10000원
-					</td>
-					<td align="center">
-						<img src="./image/test.jpg" style="max-width: 100%; height: auto;">3<br/>사진3<br/>10000원
-					</td>
-					<td align="center">
-						<img src="./image/test.jpg" style="max-width: 100%; height: auto;">4<br/>사진4<br/>10000원
-					</td>
-					
-				</tr>
-			</table>
-	
+	<div class="progress col-md-12 m-2">
+		<div class="progress-bar" style="width: ${currentPercent}%"></div>
+	</div>
 
+	<c:forEach var="board" items="${boards}">
+		<div class="card col-md-12 m-2">
+			<div class="card-body">
+				<h4 class="card-title">${board.title}</h4>
+				<p class="card-text">${board.content}</p>
+				<a href="/blog/board?cmd=detail&id=${board.id}" class="btn btn-primary">상세보기</a>
+			</div>
+		</div>
+	</c:forEach>
 
-	<br/>
-	<br/>
+	<br />
 
 	<%@ include file="include/paging.jsp"%>
 

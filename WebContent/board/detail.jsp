@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="../include/nav.jsp"%>
-
+<br/><br/><br/><br/><br/><br/><br/><br/>
 <div class="container">
 	<%@ include file="../include/goBack.jsp"%>
 	
@@ -77,3 +77,7 @@
 <script src="/blog/js/detail.js"></script>
 <script src="/blog/js/reply.js"></script>
 <%@ include file="../include/footer.jsp"%>
+
+
+
+
