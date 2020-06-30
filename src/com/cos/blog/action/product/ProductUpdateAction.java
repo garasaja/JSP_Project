@@ -29,8 +29,8 @@ public class ProductUpdateAction implements Action{
 //		ProductDetailResponseDto productResponseDto = productRepository.findById(id);
 //		if(productResponseDto != null) {
 //			request.setAttribute("productResponseDto", productResponseDto);
-//			RequestDispatcher dis = request.getRequestDispatcher("product/update.jsp");
-//			dis.forward(request, response);
+			RequestDispatcher dis = request.getRequestDispatcher("product/update.jsp");
+			dis.forward(request, response);
 //		}else {
 //			Script.back("잘못된 접근입니다.", response);
 //		}

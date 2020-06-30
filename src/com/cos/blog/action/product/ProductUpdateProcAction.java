@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.cos.blog.action.Action;
 import com.cos.blog.model.Product;
+import com.cos.blog.model.Users;
 import com.cos.blog.repository.ProductRepository;
 import com.cos.blog.util.Script;
 
@@ -63,7 +64,9 @@ public class ProductUpdateProcAction implements Action{
 				int result = productRepository.update(product);
 				
 				if(result ==1) {
-					Script.href("수정완료","/second/product?cmd=detail&pid="+pid, response);
+					Product product2 = productRepository.findById(pid);
+					session.setAttribute("product2", product2);
+					Script.href("수정완료","/blog/product?cmd=detail&pid="+pid, response);
 				}else {
 					Script.back("상품 수정 실패", response);
 				}

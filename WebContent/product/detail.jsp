@@ -33,7 +33,7 @@
 				<!-- Breadcrumbs -->
 
 				<c:if test="${sessionScope.principal.id == product.puserId}">
-					<a href="/blog/board?cmd=update&id=${product.pid}" class="btn btn-warning">수정</a>
+					<a href="/blog/product?cmd=update&id=${product.pid}" class="btn btn-warning">수정</a>
 					<button class="btn btn-danger" onclick="deleteById(${product.pid})">삭제</button>
 				</c:if>
 
