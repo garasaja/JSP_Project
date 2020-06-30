@@ -62,10 +62,10 @@ public class ProductRegisterProcAction implements Action{
 		String ptitle = null;
 		String pcategory = null;
 		String pplace = null;
-		int pprice=0;
+		int pprice = 0;
 		String pcontent = null;
 		
-		
+		System.out.println("pprice : "+ pprice);
 		try {
 			MultipartRequest multi = new MultipartRequest
 					(
@@ -110,6 +110,7 @@ public class ProductRegisterProcAction implements Action{
 		ProductRepository productRepository = 
 				ProductRepository.getInstance();
 		int result = productRepository.register(product);
+		
 		
 		System.out.println("pprofile은 :" + pprofile);
 		// 5번 result == 1이면 성공로직(index.jsp로 이동)

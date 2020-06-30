@@ -37,7 +37,9 @@
 					<div class="panel-body">
 						<textarea id="reply__write__form" class="form-control" placeholder="write a comment..." rows="3"></textarea>
 						<br>
-						<button onclick="replyWrite(${detailDto.boardDto.board.id}, ${sessionScope.principal.id})" class="btn btn-primary pull-right">댓글쓰기</button>
+						<button onclick="replyWrite(${detailDto.boardDto.board.id}, ${sessionScope.principal.id})" class="btn btn-primary">댓글쓰기</button> 
+<!-- 						<button class="btn btn-primary pull-right">댓글쓰기</button> -->
+<%-- 						<button onclick="replyWrite(${detailDto.boardDto.board.id}, ${sessionScope.principal.id})" class="btn btn-primary pull-right">댓글쓰기</button> --%>
 						<div class="clearfix"></div>
 						<hr />
 						

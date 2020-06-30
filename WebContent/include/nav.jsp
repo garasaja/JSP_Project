@@ -118,11 +118,12 @@
 	</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
-								<form class="form-inline justify-center" action="/action_page.php">
-  								  <input class="form-control mr-sm-2" type="text" placeholder="상품을 검색해주세요">
+								<form class="form-inline d-flex justify-center" action="/blog/product?cmd=search">
+								<input type="hidden" name="cmd" value="search" />
+  								  <input class="form-control mr-sm-2" type="text" name="keyword" placeholder="상품을 검색해주세요">
   								  <button class="btn btn-success" type="submit">Search</button>
  								 </form>
-								
+						
 							</ul>
 							<ul class="navbar_user">
 								<li><a href="product?cmd=basket"><i class="fa fa-heart" aria-hidden="true"></i></a></li> 

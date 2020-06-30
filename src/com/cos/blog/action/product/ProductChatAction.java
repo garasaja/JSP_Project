@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cos.blog.action.Action;
 
-
-
 public class ProductChatAction implements Action{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.cos.blog.model.Product" %>
-<%@ include file="include/nav.jsp"%>
+<%@ include file="../include/nav.jsp"%>
 
 <br/><br/><br/><br/><br/><br/><br/>
 	
@@ -39,9 +39,9 @@
 						<div class="product-item men">
 							<div class="product discount product_filter">
 								<div class="product_image">
-									<a href="/blog/product?cmd=detail&pid=${product.pid}"><img src="${product.pprofile}" alt="사진이 없음"></a>
+									<img src="${product.pprofile}" alt="">
 								</div>
-<!-- 								<div class="favorite favorite_left"></div> -->
+								<div class="favorite favorite_left"></div>
 								<div class="product_info">
 									<h6 class="product_name"><a href="/blog/product?cmd=detail&pid=${product.pid}">${product.ptitle}</a></h6>
 									<div class="product_price">${product.pprice}</div>
@@ -209,7 +209,7 @@
 
 	
 	
-	<%@ include file="include/footer.jsp"%>
+	<%@ include file="../include/footer.jsp"%>
 
 </div>
 

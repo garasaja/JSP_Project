@@ -9,64 +9,50 @@
 <body>
 <div class="container">
 	<form action="/blog/product?cmd=buyProc" method="POST" class="was-validated" onsubmit="return validate()">
-	  <table class= "table table-bordered table-hover" style="text-align: center; border:1px solid #dddddd">
-	  	<thead>
-	  		<tr>
-	  			<th colspan="3"><h4>결제하기(택배거래)</h4></th>
-	  		<tr>
-	  	</thead>
-	  	<tbody>
-	  		<tr>
-	  		<div class="form-group">
-	  			<td style="width:110px;"><h5>배송지</h5></td>
-	  			<td><input type="text" class="form-control" id="address" placeholder="배송지를 검색해주세요" name="address" required readonly></td>
+	  <table border="1" bordercolor="blue" width ="800" height="500" align = "center" >
+    <tr bgcolor="blue" align ="center">
+	<p><td colspan = "3" span style="color:white">결제하기</td></p>
+    </tr>
+    <tr>
+	<td style="width:80px;">배송지</td>
+	<td><input type="text" class="form-control" id="address" placeholder="배송지를 검색해주세요" name="buyaddress"  width="600px" readonly></td>
 	  			<td style="width:110px"><button class="btn btn-primary" type="button" class="form-control" onclick="goPopup()">주소검색</button></td>
-	  		</div>
-	  		</tr>
-	  		<tr>
-	  		<div class="form-group">
-	  				<td style="width:110px;"><h5>배송 요청사항</h5></td>
-	  					<td>
-	  						<select name="please">
+		<input type="hidden" name="userid" value="${sessionScope.principal.id}" />
+		<input type="hidden" name="userid" value="${sessionScope.principal.id}" />
+    </tr>
+    <tr>
+	<td style="width:80px;">배송요청사항</td>
+	<td style="width:700px;"><select name="buyrequest">
     							<option value="문앞">문앞</option>
     							<option value="직접 받고 부재시 문앞">직접 받고 부재시 문앞</option>
     							<option value="경비실">경비실</option>
-    							<option value="우편함">우편함</option>
-    							<option value="직접입력">직접입력
-    							<input type="text" class="form-control" id="address" placeholder="요청사항 입력"/>
-    							</option>    										
-    						</select>
-    					</td>
-	  			</div>
-	  		</tr>
-	  		<tr>
-	  		<div class="form-group">
-	  				<td style="width:110px;"><h5>결제수단</h5></td>
-	  					<td>
-	  						<select name="howmoney">
+    							<option value="우편함">우편함</option>  										
+    						</select></td>
+	
+    </tr>
+    <tr>
+	<td style="width:80px;">결제수단</td>
+	<td>
+	  						<select name="buypayment">
     							<option value="간편계좌결제">간편계좌결제</option>
     							<option value="신용카드">신용카드</option>
     							<option value="무통장입금(가상계좌)">무통장입금(가상계좌)</option>    										
     						</select>
     					</td>
-	  			</div>
-	  		</tr>
-	  		<tr>
-	  		<div class="form-group">
-	  			<td style="width:110px;"><h5>결제금액</h5></td>
-	  			<td>19000원</td>
-	  		</div>
-	  		</tr>
-	  		
-	  	</tbody>
-	  	<tfoot>
-	  		<tr>
-	  		<td></td>
-	  		<td style="width:160px;"><button type="submit" class="btn btn-primary">19000원 결제하기</button></td>
-	  		</tr>
-	  	</tfoot>
-	  	</table>
+	
+    </tr>
+    <tr>
+	<td style="width:80px;"><p name="buyprice">결제금액</p></td>
+	<td>19000원</td>
+    
+    <tr>
+    <td></td>
+    <td style="width:80px;"><button type="submit" class="btn btn-primary">19000원 결제하기</button></td>
+    <td></td>
+    </tr>
+
+</table>
 	  	</form>
-	  
+	  <script src="${path}/js/juso.js"></script>
 </body>
 </html>

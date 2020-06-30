@@ -27,7 +27,7 @@
     			<div class="d-flex justify-content-center">
 	    	
     			<div class="form-group">
-	    			<img id="img__wrap" onerror="this.src='blog/image/test.jpg" src="${product.pprofile}" width="200px" height="200px" />
+	    			<img id="img__wrap" src="${product.pprofile}" width="200px" height="200px" alt="사진등록해주세요"/>
     			</div>
     			<div class="form-group bg-light">
 	    			<input type="file" name="pprofile" id="img__preview"/>

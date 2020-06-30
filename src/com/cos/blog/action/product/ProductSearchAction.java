@@ -7,35 +7,35 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.cos.blog.action.Action;
+import com.cos.blog.model.Board;
 import com.cos.blog.model.Product;
+import com.cos.blog.repository.BoardRepository;
 import com.cos.blog.repository.ProductRepository;
+import com.cos.blog.util.HtmlParser;
 import com.cos.blog.util.Script;
 
-public class ProductDetailAction implements Action{
+public class ProductSearchAction implements Action{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*int pid = Integer.parseInt(request.getParameter("pid"));
+		if(request.getParameter("keyword") == null ||
+				request.getParameter("keyword").equals("")) {
+			Script.back("검색 키워드가 없습니다.", response);
+			return;
+		}
+
+		String keyword = request.getParameter("keyword");
 		
+		// 1. DB연결해서 Board 목록 다 불러와서
 		ProductRepository productRepository = ProductRepository.getInstance();
 		
-		List<Product> productlist = productRepository.findAll(pid);
-		
+		List<Product> productlist = productRepository.findAll(keyword);
+			
 		request.setAttribute("productlist", productlist);
 		
-		RequestDispatcher dis = request.getRequestDispatcher("product/detail.jsp");
-		dis.forward(request, response);*/
-		
-		int pid = Integer.parseInt(request.getParameter("pid"));
-		
-		ProductRepository productRepository = ProductRepository.getInstance();
-		
-		Product product = productRepository.findById(pid);
-		
-		request.setAttribute("product", product);
-		
-		RequestDispatcher dis = request.getRequestDispatcher("product/detail.jsp");
+		RequestDispatcher dis = request.getRequestDispatcher("shop.jsp");
 		dis.forward(request, response);
 		
 	}
