@@ -33,7 +33,7 @@
 				<!-- Breadcrumbs -->
 
 				<c:if test="${sessionScope.principal.id == product.puserId}">
-					<a href="/blog/product?cmd=update&id=${product.pid}" class="btn btn-warning">수정</a>
+					<a href="/blog/product?cmd=update&pid=${product.pid}" class="btn btn-warning">수정</a>
 					<button class="btn btn-danger" onclick="deleteById(${product.pid})">삭제</button>
 				</c:if>
 
@@ -67,7 +67,7 @@
 					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
 						<button type="button" class="btn btn-primary"  onclick ="like();" >찜</button>
 						<button type="button" class="btn btn-secondary" onclick = "location.href ='/blog/product?cmd=chat'">연락하기</button>
-						<button type="button" class="btn btn-success" onclick = "location.href ='/blog/product?cmd=buy'">바로구매</button>
+						<button type="button" class="btn btn-success" onclick = "location.href ='/blog/product?cmd=buy&pid=${product.pid}'">바로구매</button>
 					</div>
 				</div>
 			</div>
@@ -81,11 +81,15 @@
 
 				</div>
 		<script>
+			var love= false;
 			function like() {
+				love=true;
 				alert("찜목록에 추가되었습니다.");
+				
+				
 			}
 		</script>
-	
+<script src="/blog/js/productdetail.js"></script>
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="styles/bootstrap4/popper.js"></script>
 <script src="styles/bootstrap4/bootstrap.min.js"></script>

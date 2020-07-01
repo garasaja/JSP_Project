@@ -7,7 +7,7 @@
 
 
 <div class="container">
-<form action="/blog/product?cmd=updateProc" method="POST" class="was-validated" onsubmit="return validate()" enctype="multipart/form-data">
+<form action="/blog/product?cmd=updateProc&pid=${product.pid}" method="POST" class="was-validated" onsubmit="return validate()" enctype="multipart/form-data">
 	  <table class= "table table-striped" style="text-align: center; border:1px solid #dddddd">
 	  	<thead>
 	  		<tr>
@@ -27,14 +27,14 @@
 	  		<tr>
 	  		<div class="form-group">
 	  			<td style="width:110px;"><h5>제목</h5></td>
-	  			<td><input class="form-control" type="text" id="ptitle" name="ptitle" maxlength="40" placeholder="제목을 입력해 주세요"></td>
+	  			<td><input class="form-control" type="text" id="ptitle" name="ptitle" maxlength="40" placeholder="제목을 입력해 주세요" value="${product.ptitle}"></td>
 	  		</div>
 	  		</tr>
 	  		<tr>
 	  			<div class="form-group">
 	  				<td style="width:110px;"><h5>카테고리</h5></td>
 	  					<td>
-	  						<select name="pcategory" value="${product2.pcategory}">
+	  						<select name="pcategory" value="${product.pcategory}">
     							<option value="남성의류">남성의류</option>
     							<option value="여성의류">여성의류</option>
     							<option value="디지털/가전">디지털/가전</option>
@@ -52,7 +52,7 @@
 	  			<div class="form-group">
 		  			<td style="width:110px;"><h5>거래지역</h5></td>
 	  				<td>
-	  					<select name="pplace">
+	  					<select name="pplace" value="${product.pplace}">
     						<option value="부산">부산</option>
     						<option value="울산">울산</option>
     						<option value="서울">서울</option>
@@ -65,13 +65,13 @@
 	  		<tr>
 	  		<div class="form-group">
 	  			<td style="width:110px;"><h5>가격</h5></td>
-	  			<td><input class="form-control" type="text" id="pprice" name="pprice" placeholder="가격을 입력해주세요" value="${sessionScope.product2.pcontent }"></td>
+	  			<td><input class="form-control" type="text" id="pprice" name="pprice" placeholder="가격을 입력해주세요" value="${product.pprice}"></td>
 	  		</div>
 	  		</tr>
 	  		<tr>
 	  		<div class="form-group">
 	  			<td style="width:110px;"><h5>설명</h5></td>
-	  			<td><textarea name="pcontent" rows="10" cols="130" placeholder="상품 설명을 입력해주세요."></textarea></td>
+	  			<td><textarea name="pcontent" rows="10" cols="130" placeholder="상품 설명을 입력해주세요." >${product.pcontent}</textarea></td>
 	  		</div>
 	  		</tr>
 	  	</tbody>

@@ -12,6 +12,8 @@ import com.cos.blog.model.Product;
 import com.cos.blog.model.Users;
 import com.cos.blog.repository.ProductRepository;
 import com.cos.blog.util.Script;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 
 public class ProductUpdateProcAction implements Action{
@@ -23,32 +25,50 @@ public class ProductUpdateProcAction implements Action{
 					Script.getMessage("잘못된 접근입니다.", response);
 					return;
 				}
+								
 				
-				if
-				(
-						request.getParameter("pid").equals("") ||
-						request.getParameter("pid") == null ||
-						request.getParameter("ptitle").equals("") ||
-						request.getParameter("ptitle") == null ||
-						request.getParameter("pcontent").equals("") ||
-						request.getParameter("pcontent") == null ||
-						request.getParameter("pcategory").equals("") ||
-						request.getParameter("pcategory") == null ||
-						request.getParameter("pplace").equals("") ||
-						request.getParameter("pplace") == null ||
-						request.getParameter("pprice").equals("") ||
-						request.getParameter("pprice") == null 
-						
-				) {
-					return;
-				}
+				String realPath = 
+						request.getServletContext().getRealPath("image");
+				int id;
+				String fileName = null;
+				String contextPath = request.getServletContext().getContextPath();
+				String pprofile = null; //DB에 들어갈 변수 : 위치
 				
+				System.out.println("realPath : "+realPath);
+				System.out.println("contextPath : "+contextPath);
+			
 				int pid = Integer.parseInt(request.getParameter("pid"));
-				String ptitle = request.getParameter("title");
-				String pcontent = request.getParameter("pcontent");
-				String pcategory = request.getParameter("pcategory");
-				String pplace = request.getParameter("pplace");
-				int pprice = Integer.parseInt(request.getParameter("pprice"));
+				String ptitle = null;
+				String pcategory = null;
+				String pplace = null;
+				int pprice = 0;
+				String pcontent = null;
+				
+				try {
+					MultipartRequest multi = new MultipartRequest
+							(
+								request, 
+								realPath,
+								1024*1024*2,
+								"UTF-8",
+								new DefaultFileRenamePolicy()
+							);
+					fileName = multi.getFilesystemName("pprofile");
+					System.out.println("fileName : "+fileName);
+					id = Integer.parseInt(multi.getParameter("id"));
+					
+					pprofile = contextPath+"/image/"+fileName;
+					ptitle = multi.getParameter("ptitle");
+					pcategory = multi.getParameter("pcategory");
+					pplace = multi.getParameter("pplace");
+					pprice = Integer.parseInt(multi.getParameter("pprice"));
+					pcontent = multi.getParameter("pcontent");
+					
+				}catch (Exception e) {
+					e.printStackTrace();
+					Script.getMessage("오류 : "+e.getMessage(), response);
+				}
+
 				
 				Product product = Product.builder()
 						.pid(pid)
@@ -58,14 +78,15 @@ public class ProductUpdateProcAction implements Action{
 						.pcategory(pcategory)
 						.pprice(pprice)
 						.pplace(pplace)
+						.pprofile(pprofile)
 						.build();
 				
 				ProductRepository productRepository = ProductRepository.getInstance();
 				int result = productRepository.update(product);
 				
 				if(result ==1) {
-					Product product2 = productRepository.findById(pid);
-					session.setAttribute("product2", product2);
+					//product = productRepository.findById(pid);
+					//session.setAttribute("product", product);
 					Script.href("수정완료","/blog/product?cmd=detail&pid="+pid, response);
 				}else {
 					Script.back("상품 수정 실패", response);

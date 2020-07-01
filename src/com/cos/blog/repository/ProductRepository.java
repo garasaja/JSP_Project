@@ -26,7 +26,26 @@ public class ProductRepository {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
-	public int save(Buy buy) {
+	public int deleteById(int pid) {
+		final String SQL = "DELETE FROM product WHERE pid = ?";
+		
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			// 물음표 완성하기
+			pstmt.setInt(1, pid);
+			return pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(TAG+"deleteById : "+e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt);
+		}
+
+		return -1;
+	}
+	
+	public int save(Buy buy, int pid) {
 		final String SQL = "INSERT INTO buy(id,userid, productid, buyaddress, buyrequest, buyprice, buypayment) VALUES(buy_SEQ.nextval, ?,?,?,?,?,?";
 		
 		try {
@@ -206,7 +225,7 @@ public class ProductRepository {
 	}
 	
 	public int update(Product product) {
-		final String SQL = "UPDATE product SET ptitle = ?, pcontent = ?,pcategory = ?, pplace = ?, pprice = ? pprofile = ? WHERE pid = ?";
+		final String SQL = "UPDATE product SET ptitle = ?, pcontent = ?,pcategory = ?, pplace = ?, pprice = ?, pprofile = ? WHERE pid = ?";
 		
 		try {
 			conn = DBConn.getConnection();
@@ -283,6 +302,51 @@ public class ProductRepository {
 			conn = DBConn.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, pid);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Product product = Product.builder()
+						.pid(rs.getInt(1))
+						.puserId(rs.getInt(2))
+						.ptitle(rs.getString(3))
+						.pcategory(rs.getString(4))
+						.pplace(rs.getString(5))
+						.pcontent(rs.getString(6))
+						.preadCount(rs.getInt(7))
+						.pcreateDate(rs.getTimestamp(8))
+						.pprofile(rs.getString(9))
+						.pprice(rs.getInt(10))
+						.build();
+						//rs.getInt("pid")
+						/*rs.getInt("pid"),
+						rs.getInt("puserId"),
+						rs.getString("ptitle"),
+						rs.getString("pcategory"),
+						rs.getString("pplace"),
+						rs.getString("pcontent"),
+						rs.getInt("preadcount"),
+						rs.getTimestamp("createDate")*/
+				
+				productlist.add(product);
+			}
+			
+			return productlist;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(TAG+"findAll : "+e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+
+		return null;
+	}
+	
+	public List<Product> likeAll() {
+		final String SQL = "SELECT pid,puserid,ptitle,pcategory,pplace,pcontent,preadcount,pcreateDate,pprofile,pprice FROM product ORDER BY pid DESC";
+		List<Product> productlist = new ArrayList<>();
+		
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Product product = Product.builder()

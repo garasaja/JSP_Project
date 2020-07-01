@@ -15,6 +15,7 @@ import com.cos.blog.action.product.ProductBasketProcAction;
 import com.cos.blog.action.product.ProductBuyAction;
 import com.cos.blog.action.product.ProductBuyProcAction;
 import com.cos.blog.action.product.ProductChatAction;
+import com.cos.blog.action.product.ProductDeleteAction;
 import com.cos.blog.action.product.ProductDetailAction;
 import com.cos.blog.action.product.ProductRegisterAction;
 import com.cos.blog.action.product.ProductRegisterProcAction;
@@ -79,6 +80,8 @@ public class ProductController extends HttpServlet {
 			return new ProductBasketProcAction();
 		}else if(cmd.equals("search")) {
 			return new ProductSearchAction(); //검색하기
+		}else if(cmd.equals("delete")) {
+			return new ProductDeleteAction(); //검색하기
 		}
 		return null;
 	}

@@ -4,26 +4,6 @@
 
 <br/><br/><br/><br/><br/><br/><br/>
 	
-	<!-- Tabs -->
-
-	<div class="tabs_section_container">
-
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="tabs_container">
-						<ul class="tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
-							<li class="tab active" data-active-tab="tab_1"><span>상품리스트    </span></li>
-							<li class="tab" data-active-tab="tab_2"><span>상품 쓰기    </span></li>
-							<li class="tab" data-active-tab="tab_3"><span>상품 업데이트    </span></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			</div>
-			</div>
-	
-
 	<!-- New Arrivals -->
 
 	<div class="new_arrivals">
