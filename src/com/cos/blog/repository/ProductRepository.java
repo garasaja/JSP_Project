@@ -7,10 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cos.blog.db.DBConn;
+import com.cos.blog.dto.BasketResponseDto;
 import com.cos.blog.dto.BoardResponseDto;
+import com.cos.blog.dto.ReplyResponseDto;
+import com.cos.blog.model.Basket;
 import com.cos.blog.model.Board;
 import com.cos.blog.model.Buy;
 import com.cos.blog.model.Product;
+import com.cos.blog.model.Reply;
 import com.cos.blog.model.Users;
 
 
@@ -25,6 +29,69 @@ public class ProductRepository {
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
+	
+	public int deleteBybasketId(int id) {
+		final String SQL = "DELETE FROM basket WHERE id = ?";
+		
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, id);
+			return pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(TAG+"deleteById : "+e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt);
+		}
+
+		return -1;
+	}
+	
+	public List<BasketResponseDto> findlikeAll(int id) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("SELECT b.id, b.userId, b.productId, ");
+		sb.append("p.ptitle, p.pcategory, p.pplace, p.pprice, p.pprofile ");
+		sb.append("FROM basket b INNER JOIN product p ");
+		sb.append("ON b.productid = p.pid ");
+		sb.append("WHERE id = ? ");
+		//sb.append("ORDER BY r.id DESC");
+		final String SQL = sb.toString();
+		List<BasketResponseDto> basketDtos = new ArrayList<>();
+		
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1,id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Basket basket = Basket.builder()
+						.id(rs.getInt(1))
+						.userid(rs.getInt(2))
+						.productid(rs.getInt(3))
+						.build();
+				BasketResponseDto basketDto = BasketResponseDto.builder()
+						.basket(basket)
+						.ptitle(rs.getString(4))
+						.pcategory(rs.getString(5))
+						.pplace(rs.getString(6))
+						.pprice(rs.getInt(7))
+						.pprofile(rs.getString(8))
+						.build();
+				basketDtos.add(basketDto);
+			}
+			
+			return basketDtos;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(TAG+"findlikeAll(userid) : "+e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+
+		return null;
+	}
 	
 	public int deleteById(int pid) {
 		final String SQL = "DELETE FROM product WHERE pid = ?";

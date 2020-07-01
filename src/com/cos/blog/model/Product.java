@@ -22,4 +22,5 @@ public class Product {
 	private String pprofile;
 	private int preadCount;
 	private Timestamp pcreateDate;
+
 }

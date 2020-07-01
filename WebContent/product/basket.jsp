@@ -4,6 +4,14 @@
 
 <br/><br/><br/><br/><br/><br/><br/>
 	
+	<!-- Tabs -->
+
+	<div class="tabs_section_container">
+
+		
+			</div>
+	
+
 	<!-- New Arrivals -->
 
 	<div class="new_arrivals">
@@ -19,15 +27,15 @@
 						<div class="product-item men">
 							<div class="product discount product_filter">
 								<div class="product_image">
-									<img src="${product.pprofile}" alt="">
+									<a href="/blog/product?cmd=detail&pid=${product.pid}"><img src="${product.pprofile}" alt="사진이 없음"></a>
 								</div>
-								<div class="favorite favorite_left"></div>
+<!-- 								<div class="favorite favorite_left"></div> -->
 								<div class="product_info">
 									<h6 class="product_name"><a href="/blog/product?cmd=detail&pid=${product.pid}">${product.ptitle}</a></h6>
-									<div class="product_price">${product.pprice}</div>
+									<div class="product_price">${product.pprice}원</div>
 								</div>
 							</div>
-							<div class="red_button add_to_cart_button"><a href="/blog/product?cmd=detail&pid=${product.pid}">add to cart</a></div>
+<%-- 							<div class="red_button add_to_cart_button"><a href="/blog/product?cmd=detail&pid=${product.pid}">add to cart</a></div> --%>
 						</div>
 						</c:forEach>
 <!--  						Product 2 --> 

@@ -4,19 +4,6 @@
 <%@ include file="../include/nav.jsp" %> 
 
 <br/><br/><br/><br/><br/><br/>
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">		
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-
-		<div class="justify-content-center" id="Navbar">
-		<ul class="navbar-nav">
-			<li class="nav-item" ><a class="nav-link" href="/blog/product?cmd=register">상품등록</a></li>
-			<li class="nav-item"><a class="nav-link" href="/blog/product?cmd=update">상품관리</a></li>
-		</ul>
-
-</div>
-</nav>
 
 <div class="container">
 <form action="/blog/product?cmd=registerProc" method="POST" class="was-validated" onsubmit="return validate()" enctype="multipart/form-data">

@@ -45,9 +45,12 @@
 				<div class="single_product_pics">
 					<div class="row">
 <%-- 					<c:forEach var="product" items="${product}"> --%>
-					
+						<form name="like" action="/blog/product?cmd=basket" method="post">
 						<img src="${product.pprofile}"/>
-						
+						<input type="hidden"  name="pplace" value="${product.pplace}"/>
+						<input type="hidden"  name="pid" value="${product.pid}"/>
+						<input type="hidden"  name="pcategory" value="${product.pcategoty}"/>
+						<input type="hidden" name="id" value="${sessionScope.principal.id}" />
 					</div>
 				</div>
 			</div>
@@ -60,12 +63,14 @@
 					</div>
 					
 					
-					<div class="product_price">${product.pprice}</div>
+					<div class="product_price">${product.pprice}원</div>
 <%-- 					</c:forEach> --%>
 					<br/>
 					
 					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-						<button type="button" class="btn btn-primary"  onclick ="like();" >찜</button>
+						
+						<input type="submit" class="btn btn-primary" >찜</input>
+						</form>
 						<button type="button" class="btn btn-secondary" onclick = "location.href ='/blog/product?cmd=chat'">연락하기</button>
 						<button type="button" class="btn btn-success" onclick = "location.href ='/blog/product?cmd=buy&pid=${product.pid}'">바로구매</button>
 					</div>
@@ -74,19 +79,12 @@
 		</div>
 
 	</div>
-
-	
-
-					
-
 				</div>
 		<script>
-			var love= false;
+			var love = false;
 			function like() {
-				love=true;
-				alert("찜목록에 추가되었습니다.");
-				
-				
+				love= true;
+				alert("찜목록에 추가되었습니다.");			
 			}
 		</script>
 <script src="/blog/js/productdetail.js"></script>
