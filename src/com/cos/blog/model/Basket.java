@@ -13,4 +13,5 @@ public class Basket {
 	private int id;
 	private int userid;
 	private int productid;
+	
 }

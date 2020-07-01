@@ -48,13 +48,13 @@ public class ProductRepository {
 		return -1;
 	}
 	
-	public List<BasketResponseDto> findlikeAll(int id) {
+	public List<BasketResponseDto> findlikeAll(int userid) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("SELECT b.id, b.userId, b.productId, ");
 		sb.append("p.ptitle, p.pcategory, p.pplace, p.pprice, p.pprofile ");
 		sb.append("FROM basket b INNER JOIN product p ");
 		sb.append("ON b.productid = p.pid ");
-		sb.append("WHERE id = ? ");
+		sb.append("WHERE userid = ? ");
 		//sb.append("ORDER BY r.id DESC");
 		final String SQL = sb.toString();
 		List<BasketResponseDto> basketDtos = new ArrayList<>();
@@ -62,7 +62,7 @@ public class ProductRepository {
 		try {
 			conn = DBConn.getConnection();
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1,id);
+			pstmt.setInt(1,userid);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -109,6 +109,25 @@ public class ProductRepository {
 			DBConn.close(conn, pstmt);
 		}
 
+		return -1;
+	}
+	
+	public int save(Basket basket) {
+		final String SQL = "INSERT INTO basket(id, userid, productid) VALUES(basket_seq.nextval, ?, ?)";
+		
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			// 물음표 완성하기
+			pstmt.setInt(1, basket.getUserid());
+			pstmt.setInt(2, basket.getProductid());
+			return pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(TAG+"save : "+e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt);
+		}
 		return -1;
 	}
 	
