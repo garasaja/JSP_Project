@@ -93,6 +93,25 @@ public class ProductRepository {
 		return null;
 	}
 	
+	public int deleteByBasketId(int id) {
+		final String SQL = "DELETE FROM basket WHERE id = ?";
+		
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			// 물음표 완성하기
+			pstmt.setInt(1, id);
+			return pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(TAG+"deleteById : "+e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt);
+		}
+
+		return -1;
+	}
+	
 	public int deleteById(int pid) {
 		final String SQL = "DELETE FROM product WHERE pid = ?";
 		
@@ -112,15 +131,50 @@ public class ProductRepository {
 		return -1;
 	}
 	
-	public int save(Basket basket) {
-		final String SQL = "INSERT INTO basket(id, userid, productid) VALUES(basket_seq.nextval, ?, ?)";
-		
+	
+	
+	public Product getById(int pid) {
+		final String SQL = "select * from product where pid = ?";
 		try {
 			conn = DBConn.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			// 물음표 완성하기
-			pstmt.setInt(1, basket.getUserid());
-			pstmt.setInt(2, basket.getProductid());
+			pstmt.setInt(1,pid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				Product product = Product.builder()
+						.pid(rs.getInt(1))
+						.puserId(rs.getInt(2))
+						.ptitle(rs.getString(3))
+						.pcategory(rs.getString(4))
+						.pplace(rs.getString(5))
+						.pcontent(rs.getString(6))
+						.preadCount(rs.getInt(7))
+						.pcreateDate(rs.getTimestamp(8))
+						.pprofile(rs.getString(9))
+						.pprice(rs.getInt(10))
+						.build();
+				return product;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(TAG+"save : "+e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt);
+		}
+		return null;
+	}
+	
+	public int save(int userid, int pid) {
+		final String SQL = "INSERT INTO basket(id, userid, productid) VALUES(basket_seq.nextval, ?, ?)";
+
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			// 물음표 완성하기
+			pstmt.setInt(1, userid);
+			pstmt.setInt(2, pid);
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -131,28 +185,7 @@ public class ProductRepository {
 		return -1;
 	}
 	
-	public int save(Buy buy, int pid) {
-		final String SQL = "INSERT INTO buy(id,userid, productid, buyaddress, buyrequest, buyprice, buypayment) VALUES(buy_SEQ.nextval, ?,?,?,?,?,?";
-		
-		try {
-			conn = DBConn.getConnection();
-			pstmt = conn.prepareStatement(SQL);
-			// 물음표 완성하기
-			pstmt.setInt(1, buy.getUserid());
-			pstmt.setInt(2, buy.getProductid());
-			pstmt.setString(3, buy.getBuyaddress());
-			pstmt.setString(4, buy.getBuyrequest());
-			pstmt.setInt(5, buy.getBuyprice());
-			pstmt.setString(5, buy.getBuypayment());
-			return pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(TAG+"save : "+e.getMessage());
-		} finally {
-			DBConn.close(conn, pstmt);
-		}
-		return -1;
-	}
+	
 	
 	public int count(String keyword) {
 		final String SQL = "SELECT count(*) FROM product WHERE ptitle LIKE ? OR pcontent LIKE ?";

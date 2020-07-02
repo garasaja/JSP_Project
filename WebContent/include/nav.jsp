@@ -55,43 +55,44 @@
 								<!--  My Account -->							
 								<li class="currency">
 									<a href="#">
-										product
+										상품
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="currency_selection">
-										<li><a href="/blog/product?cmd=shop">productlist</a></li>
-										<li><a href="/blog/product?cmd=register">productwrite</a></li>
+										<li><a href="/blog/product?cmd=shop">상품리스트</a></li>
+										<li><a href="/blog/product?cmd=register">상품글쓰기</a></li>
 										
 										
 									</ul>
 								</li>
 								<li class="language">
 									<a href="#">
-										BOARD
+										게시판
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="language_selection">
-										<li><a href="/blog/board?cmd=home&page=0">boardlist</a></li>
-										<li><a href="/blog/board?cmd=write">boardwrite</a></li>
+										<li><a href="/blog/board?cmd=home&page=0">게시판리스트</a></li>
+										<li><a href="/blog/board?cmd=write">게시판글쓰기</a></li>
 										
 										
 									</ul>
 								</li>
 								<li class="account">
 									<a href="#">
-										My Account
+										회원리스트         
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="account_selection">
 									<c:choose>
 										<c:when test="${empty sessionScope.principal}">
-										<li><a href="user?cmd=login"><i class="fa fa-sign-in" aria-hidden="true"></i>Log In</a></li>
-										<li><a href="user?cmd=join"><i class="fa fa-user-plus" aria-hidden="true"></i>Join</a></li>
+										<li><a href="user?cmd=login">로그인</a></li>
+										<li><a href="user?cmd=join"></i>회원가입</a></li>
 										</c:when>
 										<c:otherwise>
-										<li><a href="user?cmd=logout"><i class="fa fa-sign-in" aria-hidden="true"></i>Log Out</a></li>
-										<li><a href="user?cmd=update"><i class="fa fa-user-plus" aria-hidden="true"></i>Member</a></li>
-										<li><a href="user?cmd=profileUpload"><i class="fa fa-user" aria-hidden="true"></i>Profile</a></li>
+										<li><a href="user?cmd=logout">로그아웃</a></li>
+										<li><a href="user?cmd=update">회원정보변경</a></li>
+										<li><a href="user?cmd=profileUpload">프로필</a></li>
+										<li><a href="user?cmd=profileUpload">주문내역</a></li>
 										</c:otherwise>
 									</c:choose>
 									</ul>

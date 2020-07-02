@@ -56,13 +56,13 @@ public class ProductBuyProcAction implements Action{
 				.build();
 		
 		ProductRepository productRepository = ProductRepository.getInstance();
-		int result = productRepository.save(buy,pid);
-		
-		if(result == 1) {
-			Script.href("결제 성공하였습니다.", "/testPay.jsp", response);
-		}else {
-			Script.back("결제 실패하였습니다.", response);
-		}
+//		int result = productRepository.save(buy,pid);
+//		
+//		if(result == 1) {
+//			Script.href("결제 성공하였습니다.", "/testPay.jsp", response);
+//		}else {
+//			Script.back("결제 실패하였습니다.", response);
+//		}
 		
 	}
 }

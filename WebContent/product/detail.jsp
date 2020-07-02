@@ -46,7 +46,7 @@
 					<div class="row">
 <%-- 					<c:forEach var="product" items="${product}"> --%>
 					
-						<img src="${product.pprofile}"/>
+						<img src="${product.pprofile}" width="300" height="300"/>
 						
 					</div>
 				</div>
@@ -65,8 +65,8 @@
 					<br/>
 					
 					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-						<button type="button" class="btn btn-primary" onclick="like()">찜</button>					
-						<button type="button" class="btn btn-secondary" onclick = "location.href ='/blog/product?cmd=chat'">연락하기</button>
+						<button type="button" class="btn btn-primary" onclick="like(${product.pid},${sessionScope.principal.id})">찜</button>					
+						<button type="button" class="btn btn-secondary" onclick = "location.href ='/blog/product?cmd=chat&pid=${product.pid}'">연락하기</button>
 						<button type="button" class="btn btn-success" onclick = "location.href ='/blog/product?cmd=buy&pid=${product.pid}'">바로구매</button>
 					</div>
 				</div>
@@ -76,11 +76,10 @@
 	</div>
 				</div>
 		<script>
-			var love = false;
-			function like() {
-				love= true;
-				alert("찜목록에 추가되었습니다.");	
-				location.href="/blog/product?cmd=basket";		
+	
+			function like(pid,userid) {
+				alert("찜목록에 추가되었습니다.");									
+				location.href="/blog/product?cmd=basket&pid="+pid + "&userid=" + userid;								
 			}
 		</script>
 <script src="/blog/js/productdetail.js"></script>

@@ -29,37 +29,28 @@ public class ProductBasketAction implements Action{
 			Script.getMessage("잘못된 접근입니다.", response);
 			return; //여기서 return이 었으면 코드를 아래를 타고 내려간다.
 		}
-		BufferedReader br = request.getReader();
-		StringBuffer sb = new StringBuffer();
-		String input = null;
-		while((input = br.readLine()) != null) {
-			sb.append(input);
-		}
-		Gson gson = new Gson();
-		Users user = gson.fromJson(sb.toString(), Users.class);
-		Basket basket = gson.fromJson(sb.toString(), Basket.class);//?
+		
+		int userid = Integer.parseInt(request.getParameter("userid"));
+		int pid = Integer.parseInt(request.getParameter("pid"));
 		
 		ProductRepository productRepository = ProductRepository.getInstance();
-		int result = productRepository.save(basket);
+		Product product = new Product();
+		// pid로 다시 select하고 상품!!
+		product = productRepository.getById(pid);
+		// 장바구니 DB에 값 넣고
+		int result = productRepository.save(userid,pid);
+		// 장바구니 page로 이동할 때 해당 유저의 장바구니 목록 다시 select (컬렉션) - 조인(Product)
 		if(result==1) {
-			List<BasketResponseDto> basketResponseDtos = productRepository.findlikeAll(user.getId());
-			String basketDtosJson = gson.toJson(basketResponseDtos);
-			Script.outJson(basketDtosJson, response);
+			List<BasketResponseDto> basketResponseDtos = productRepository.findlikeAll(userid);
+			request.setAttribute("basketResponseDtos", basketResponseDtos);
+			RequestDispatcher dis = request.getRequestDispatcher("/product/basket.jsp");
+			dis.forward(request, response);
 		}else {
-			Script.outJson(result+"", response);
+			Script.outText("실패", response);
 		}
-		
-		
-		//productRepository.findlikeAll(id);
-		
-		
-//		List<Product> productlist = productRepository.();
-//		if(productlist != null) {
-//			session.setAttribute("productlist", productlist);
-//		}
-		
-		RequestDispatcher dis = request.getRequestDispatcher("/product/basket.jsp");
-		dis.forward(request, response);
+		// request에 담고
+				
+		// Requestdispatcher 이동해
 		
 	}
 }

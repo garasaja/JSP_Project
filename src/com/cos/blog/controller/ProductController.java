@@ -11,10 +11,12 @@ import javax.servlet.http.HttpSession;
 
 import com.cos.blog.action.Action;
 import com.cos.blog.action.product.ProductBasketAction;
+import com.cos.blog.action.product.ProductBasketDeleteAction;
 import com.cos.blog.action.product.ProductBasketProcAction;
 import com.cos.blog.action.product.ProductBuyAction;
 import com.cos.blog.action.product.ProductBuyProcAction;
 import com.cos.blog.action.product.ProductChatAction;
+import com.cos.blog.action.product.ProductChatProcAction;
 import com.cos.blog.action.product.ProductDeleteAction;
 import com.cos.blog.action.product.ProductDetailAction;
 import com.cos.blog.action.product.ProductRegisterAction;
@@ -68,6 +70,8 @@ public class ProductController extends HttpServlet {
 			return new ProductDetailAction();
 		}else if(cmd.equals("chat")) {			
 			return new ProductChatAction();
+		}else if(cmd.equals("chatProc")) {			
+			return new ProductChatProcAction();
 		}else if(cmd.equals("shop")) {			
 			return new ProductShopAction();
 		}else if(cmd.equals("buy")) {			
@@ -78,6 +82,8 @@ public class ProductController extends HttpServlet {
 			return new ProductBasketAction();
 		}else if(cmd.equals("basketProc")) {			
 			return new ProductBasketProcAction();
+		}else if(cmd.equals("basketdelete")) {			
+			return new ProductBasketDeleteAction();
 		}else if(cmd.equals("search")) {
 			return new ProductSearchAction(); //검색하기
 		}else if(cmd.equals("delete")) {

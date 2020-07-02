@@ -1,53 +1,25 @@
-function replyDelete(replyId){
-	
+function deletebybasketid(id){
 	$.ajax({
-		type: "post",
-		url: "/blog/product?cmd=deleteProc",
-		data: "replyId="+replyId,
-		contentType: "application/x-www-form-urlencoded; charset=utf-8",
+		type: "POST",
+		url: `/blog/product?cmd=basketdelete&id=${id}`,
 		dataType: "text"
 	}).done(function(result){
-		if(result == "1"){
-			alert("찜 삭제 성공");
-			var replyItem = $("#reply-"+replyId);
-			replyItem.remove();
+		console.log(result);
+		if(result == 1){
+			alert("삭제 성공");
+			var basketItem = $("#delete-"+id);
+			basketItem.remove();
 		}else{
-			alert("찜 삭제 실패");
+			alert("삭제 실패");
 		}
 	}).fail(function(error){
-		alert("찜 삭제 실패");
+		console.log(error);
+		console.log(error.responseText);
+		console.log(error.status);
+		alert("서버 오류");
 	});
 }
 
-function replyWrite(boardId, userId){
-	if(userId === undefined){
-		alert("로그인이 필요합니다.");
-		return;
-	}
-	
-	var data = {
-		productId: productId,
-		userId: userId,
-		content: $("#basket__write__form").val()
-	};
-	
-	$.ajax({
-		type: "post",
-		url: "/blog/basket?cmd=basket",
-		data: JSON.stringify(data),
-		contentType: "application/json; charset=utf-8",
-		dataType: "json"
-	}).done(function(result){
-		if(result == -1 || result == 0){
-			alert("찜하기 실패");
-		}else{
-			alert("찜하기 성공");
-			$("#reply__list").empty();
-			console.log(result);
-			renderReplyList(result, userId);
-			$("#reply__write__form").val("");
-		}
-	}).fail(function(error){
-		alert("찜하기 실패");
-	});
-}
+
+
+
