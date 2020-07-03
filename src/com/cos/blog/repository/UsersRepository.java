@@ -176,17 +176,30 @@ public class UsersRepository {
 	}
 	
 	public List<Users> findAll() {
-		final String SQL = "";
-		List<Users> users = new ArrayList<>();
+		final String SQL = "select * from users";
+		List<Users> userlist = new ArrayList<>();
 		
 		try {
 			conn = DBConn.getConnection();
 			pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
 			// 물음표 완성하기
 			
 			// while 돌려서 rs -> java오브젝트에 집어넣기
-			
-			return users;
+			while(rs.next()) {
+				Users user = new Users();
+				user.setId(rs.getInt("id"));
+				user.setUsername(rs.getString("username"));
+				user.setEmail(rs.getString("email"));
+				user.setAddress(rs.getString("address"));
+				user.setUserProfile(rs.getString("userProfile"));
+				user.setUserRole(rs.getString("userRole"));
+				user.setCreateDate(rs.getTimestamp("createDate"));
+				
+				userlist.add(user);
+				
+			}
+			return userlist;
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(TAG+"findAll : "+e.getMessage());

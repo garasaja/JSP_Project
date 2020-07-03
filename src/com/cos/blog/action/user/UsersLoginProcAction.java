@@ -1,6 +1,7 @@
 package com.cos.blog.action.user;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -42,6 +43,7 @@ public class UsersLoginProcAction implements Action{
 			session.setAttribute("principal", user);
 			
 			
+			
 			if(request.getParameter("remember") != null) {
 				// key => Set-Cookie
 				// value => remember=ssar 
@@ -52,11 +54,20 @@ public class UsersLoginProcAction implements Action{
 			}else {
 				Cookie cookie = new Cookie("remember", "");
 				cookie.setMaxAge(0);
-				response.addCookie(cookie);
-				
+				response.addCookie(cookie);				
 			}
 			
+			
+			
+			//Users adminorusers = new Users();
+			if(user.getUserRole().equals("ADMIN") ) {
+				List<Users> userlist = usersRepository.findAll();
+				request.setAttribute("userlist", userlist);
+				
+				Script.href("로그인 성공", "/blog/admin?cmd=userall", response);	
+			}else {
 			Script.href("로그인 성공", "/blog/index.jsp", response);
+			}
 		}else {
 			Script.back("로그인 실패", response);
 		}

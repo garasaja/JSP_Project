@@ -126,7 +126,7 @@ public class ReplyRepository {
 	}
 	
 	public List<Reply> findAll() {
-		final String SQL = "";
+		final String SQL = "SELECT * FROM reply";
 		List<Reply> replys = new ArrayList<>();
 		
 		try {
@@ -135,7 +135,9 @@ public class ReplyRepository {
 			// 물음표 완성하기
 			
 			// while 돌려서 rs -> java오브젝트에 집어넣기
-			
+			while(rs.next()) {
+				
+			}
 			return replys;
 		} catch (Exception e) {
 			e.printStackTrace();
