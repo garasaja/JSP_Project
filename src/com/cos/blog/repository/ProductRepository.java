@@ -9,6 +9,7 @@ import java.util.List;
 import com.cos.blog.db.DBConn;
 import com.cos.blog.dto.BasketResponseDto;
 import com.cos.blog.dto.BoardResponseDto;
+import com.cos.blog.dto.BuyResponseDto;
 import com.cos.blog.dto.ReplyResponseDto;
 import com.cos.blog.model.Basket;
 import com.cos.blog.model.Board;
@@ -46,6 +47,49 @@ public class ProductRepository {
 		}
 
 		return -1;
+	}
+	
+	public List<BuyResponseDto> findBuyAll() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("SELECT b.id,b.userid,b.productid,b.buyaddress,b.buyrequest,b.buypayment,b.buyprice, ");
+		sb.append("p.pprofile,p.ptitle ");
+		sb.append("FROM buy b INNER JOIN product p ");
+		sb.append("ON b.productid = p.pid ");
+		final String SQL = sb.toString();
+		List<BuyResponseDto> buylist = new ArrayList<>();
+		
+		
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Buy buy = Buy.builder()
+						.id(rs.getInt(1))
+						.userid(rs.getInt(2))
+						.productid(rs.getInt(3))
+						.buyaddress(rs.getString(4))
+						.buyrequest(rs.getString(5))
+						.buypayment(rs.getString(6))
+						.buyprice(rs.getInt(7))
+						.build();
+				BuyResponseDto buyDto = BuyResponseDto.builder()
+						.buy(buy)
+						.pprofile(rs.getString(8))
+						.ptitle(rs.getString(9))
+						.build();
+				buylist.add(buyDto);
+			}
+			
+			return buylist;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(TAG+"findAll : "+e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+
+		return null;
 	}
 	
 	public List<BasketResponseDto> findlikeAll(int userid) {
@@ -185,7 +229,28 @@ public class ProductRepository {
 		return -1;
 	}
 	
-	
+	public int buysave(Buy buy,int productid,int userid) {
+		final String SQL = "INSERT INTO buy(id, userid, productid,buyaddress,buyrequest,buypayment,buyprice) VALUES(basket_seq.nextval,?, ?, ?,?,?,?)";
+
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			// 물음표 완성하기
+			pstmt.setInt(1, userid);
+			pstmt.setInt(2, productid);
+			pstmt.setString(3, buy.getBuyaddress());
+			pstmt.setString(4, buy.getBuyrequest());
+			pstmt.setString(5, buy.getBuypayment());
+			pstmt.setInt(6, buy.getBuyprice());
+			return pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(TAG+"save : "+e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt);
+		}
+		return -1;
+	}
 	
 	public int count(String keyword) {
 		final String SQL = "SELECT count(*) FROM product WHERE ptitle LIKE ? OR pcontent LIKE ?";
@@ -220,6 +285,7 @@ public class ProductRepository {
 			pstmt.setInt(1, pid);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
+				
 				Product product = Product.builder()
 						.pid(rs.getInt(1))
 						.puserId(rs.getInt(2))
@@ -232,15 +298,7 @@ public class ProductRepository {
 						.pprofile(rs.getString(9))
 						.pprice(rs.getInt(10))
 						.build();
-						//rs.getInt("pid")
-						/*rs.getInt("pid"),
-						rs.getInt("puserId"),
-						rs.getString("ptitle"),
-						rs.getString("pcategory"),
-						rs.getString("pplace"),
-						rs.getString("pcontent"),
-						rs.getInt("preadcount"),
-						rs.getTimestamp("createDate")*/
+
 				
 				return product;
 			}
@@ -366,52 +424,7 @@ public class ProductRepository {
 		}
 
 		return -1;
-	}
-	
-	/*public ProductDetailResponseDto findById(int id) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT p.id, p.userId, p.title, p.content, p.readCount, p.createDate, u.username ");
-		sb.append("FROM product p INNER JOIN users u ");
-		sb.append("ON p.userId = u.id ");
-		sb.append("WHERE p.id = ?");
-		final String SQL = sb.toString();
-		ProductDetailResponseDto productDto = null;
-		
-		try {
-			conn = DBConn.getConnection();
-			pstmt = conn.prepareStatement(SQL);
-			// 물음표 완성하기 
-			pstmt.setInt(1, id);
-			// if 돌려서 rs -> java오브젝트에 집어넣기
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				productDto = new ProductDetailResponseDto();
-				Product product = Product.builder()
-						.pid(rs.getInt(1))
-						.puserId(rs.getInt(2))
-						.ptitle(rs.getString(3))
-						.pcategory(rs.getString(4))
-						.pplace(rs.getString(5))
-						.pcontent(rs.getString(6))
-						.preadCount(rs.getInt(7))
-						.pcreateDate(rs.getTimestamp(8))
-						.pprice(rs.getInt(9))
-						.pprofile(rs.getString(10))
-						.build();
-				productDto.setProduct(product);
-				productDto.setUsername(rs.getString(11));
-				
-			}
-			return productDto;
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(TAG+"findById : "+e.getMessage());
-		} finally {
-			DBConn.close(conn, pstmt, rs);
-		}
-
-		return null;
-	}*/
+	}	
 	
 	public List<Product> findAll(int pid) {
 		final String SQL = "SELECT pid,puserid,ptitle,pcategory,pplace,pcontent,preadcount,pcreateDate,pprofile,pprice FROM product WHERE PID = ? ORDER BY pid DESC";
@@ -435,15 +448,6 @@ public class ProductRepository {
 						.pprofile(rs.getString(9))
 						.pprice(rs.getInt(10))
 						.build();
-						//rs.getInt("pid")
-						/*rs.getInt("pid"),
-						rs.getInt("puserId"),
-						rs.getString("ptitle"),
-						rs.getString("pcategory"),
-						rs.getString("pplace"),
-						rs.getString("pcontent"),
-						rs.getInt("preadcount"),
-						rs.getTimestamp("createDate")*/
 				
 				productlist.add(product);
 			}
@@ -480,15 +484,6 @@ public class ProductRepository {
 						.pprofile(rs.getString(9))
 						.pprice(rs.getInt(10))
 						.build();
-						//rs.getInt("pid")
-						/*rs.getInt("pid"),
-						rs.getInt("puserId"),
-						rs.getString("ptitle"),
-						rs.getString("pcategory"),
-						rs.getString("pplace"),
-						rs.getString("pcontent"),
-						rs.getInt("preadcount"),
-						rs.getTimestamp("createDate")*/
 				
 				productlist.add(product);
 			}
@@ -525,15 +520,6 @@ public class ProductRepository {
 						.pprofile(rs.getString(9))
 						.pprice(rs.getInt(10))
 						.build();
-						//rs.getInt("pid")
-						/*rs.getInt("pid"),
-						rs.getInt("puserId"),
-						rs.getString("ptitle"),
-						rs.getString("pcategory"),
-						rs.getString("pplace"),
-						rs.getString("pcontent"),
-						rs.getInt("preadcount"),
-						rs.getTimestamp("createDate")*/
 				
 				productlist.add(product);
 			}
@@ -548,6 +534,8 @@ public class ProductRepository {
 
 		return null;
 	}
+	
+	
 	
 	//조회수 증가
 	public int UpdatereadCount(int pid) {

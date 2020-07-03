@@ -13,8 +13,10 @@ import com.cos.blog.action.Action;
 import com.cos.blog.action.product.ProductBasketAction;
 import com.cos.blog.action.product.ProductBasketDeleteAction;
 import com.cos.blog.action.product.ProductBasketProcAction;
+import com.cos.blog.action.product.ProductBasketSelectAction;
 import com.cos.blog.action.product.ProductBuyAction;
 import com.cos.blog.action.product.ProductBuyProcAction;
+import com.cos.blog.action.product.ProductBuySelectAction;
 import com.cos.blog.action.product.ProductChatAction;
 import com.cos.blog.action.product.ProductChatProcAction;
 import com.cos.blog.action.product.ProductDeleteAction;
@@ -85,9 +87,13 @@ public class ProductController extends HttpServlet {
 		}else if(cmd.equals("basketdelete")) {			
 			return new ProductBasketDeleteAction();
 		}else if(cmd.equals("search")) {
-			return new ProductSearchAction(); //검색하기
+			return new ProductSearchAction(); 
 		}else if(cmd.equals("delete")) {
-			return new ProductDeleteAction(); //검색하기
+			return new ProductDeleteAction(); 
+		}else if(cmd.equals("buyselect")) {
+			return new ProductBuySelectAction(); 
+		}else if(cmd.equals("basketselect")) {
+			return new ProductBasketSelectAction(); 
 		}
 		return null;
 	}

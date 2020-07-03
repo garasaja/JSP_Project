@@ -33,17 +33,19 @@ img {
           <th>카테고리</th>
           <th>장소</th>
           <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody id="body_id">       
         <c:forEach var="basketResponseDtos" items="${basketResponseDtos}">
 		<tr id="delete-${basketResponseDtos.basket.id}">
-    	  <td><img src="${basketResponseDtos.pprofile}" alt="사진이 없습니다."/></td>
+    	  <td width="60px"><img src="${basketResponseDtos.pprofile}" alt="사진이 없습니다."/></td>
           <td>${basketResponseDtos.ptitle}</td>
           <td>${basketResponseDtos.pprice}</td>
           <td>${basketResponseDtos.pcategory}</td>
           <td>${basketResponseDtos.pplace}</td>
-          <td><input onclick="deletebybasketid(${basketResponseDtos.basket.id})" type="button" value="삭제"></td>    
+          <td width="60px"><input onclick="deletebybasketid(${basketResponseDtos.basket.id})" type="button" value="삭제"></td>    
+          <td width="60px"><button type="button" class="btn btn-success" onclick = "location.href ='/blog/product?cmd=buy&pid=${basketResponseDtos.basket.productid}'">바로구매</button></td>
           </tr>      
    	    </c:forEach>
       </tbody>

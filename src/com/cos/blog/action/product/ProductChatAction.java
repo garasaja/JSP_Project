@@ -27,13 +27,12 @@ public class ProductChatAction implements Action{
 			return; //여기서 return이 었으면 코드를 아래를 타고 내려간다.
 		}
 		ProductRepository productRepository = ProductRepository.getInstance();
-		Product product = new Product();
 		ChatRepository chatRepository = ChatRepository.getInstance();
 				
 		int pid = Integer.parseInt(request.getParameter("pid"));
 //		Users user = (Users)session.getAttribute("principal");
-		
-		
+		//Product product = productRepository.findById(pid);
+				
 		//product = productRepository.getById(pid);
 		//Chat chat = new Chat();
 		 List<ChatResponseDto> chatDtos = chatRepository.findAll(pid);

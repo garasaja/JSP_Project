@@ -51,6 +51,7 @@ public class ChatRepository {
 		sb.append("FROM chat c INNER JOIN users u ");
 		sb.append("ON c.userid = u.id ");
 		sb.append("WHERE pid = ? ");
+		sb.append("ORDER BY createDate asc ");
 		final String SQL = sb.toString();
 		List<ChatResponseDto> chatDtos = new ArrayList<>();
 		
@@ -58,6 +59,7 @@ public class ChatRepository {
 			conn = DBConn.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, pid);
+
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {

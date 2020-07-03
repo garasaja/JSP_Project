@@ -1,13 +1,16 @@
 package com.cos.blog.action.product;
 
 import java.io.IOException;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.cos.blog.action.Action;
+import com.cos.blog.dto.BuyResponseDto;
 import com.cos.blog.model.Buy;
 import com.cos.blog.model.Users;
 import com.cos.blog.repository.ProductRepository;
@@ -39,13 +42,13 @@ public class ProductBuyProcAction implements Action{
 //			System.out.println("유효성 리턴");
 //			return;
 //		}
-		
+		String pprofile = request.getParameter("pprofile");
 		String buyaddress = request.getParameter("buyaddress");
 		String buyrequest = request.getParameter("buyrequest");
 		String buypayment = request.getParameter("buypayment");
-		int buyprice = Integer.parseInt(request.getParameter("buyprice"));		
+			
 		int productid = Integer.parseInt(request.getParameter("productid"));
-		int pid = Integer.parseInt(request.getParameter("pid"));
+		int buyprice = Integer.parseInt(request.getParameter("buyprice"));	
 		Buy buy = Buy.builder()
 				.buyaddress(buyaddress)
 				.buyprice(buyprice)
@@ -55,14 +58,19 @@ public class ProductBuyProcAction implements Action{
 				.buypayment(buypayment)
 				.build();
 		
+		
+		
 		ProductRepository productRepository = ProductRepository.getInstance();
-//		int result = productRepository.save(buy,pid);
-//		
-//		if(result == 1) {
-//			Script.href("결제 성공하였습니다.", "/testPay.jsp", response);
-//		}else {
-//			Script.back("결제 실패하였습니다.", response);
-//		}
+		int result = productRepository.buysave(buy,productid,principal.getId());
+		
+		if(result == 1) {
+			List<BuyResponseDto> buylist = productRepository.findBuyAll();
+			request.setAttribute("buylist", buylist);
+			RequestDispatcher dis = request.getRequestDispatcher("buylist.jsp");
+			dis.forward(request, response);
+		}else {
+			Script.outText("실패", response);
+		}
 		
 	}
 }

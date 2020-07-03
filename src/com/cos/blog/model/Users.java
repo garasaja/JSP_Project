@@ -21,3 +21,4 @@ public class Users {
 	private String userRole;
 	private Timestamp createDate;
 }
+

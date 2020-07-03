@@ -52,7 +52,8 @@
 						<div class="top_nav_right">
 							<ul class="top_nav_menu">
 
-								<!--  My Account -->							
+								<!-- Currency / Language / My Account -->
+
 								<li class="currency">
 									<a href="#">
 										상품
@@ -61,8 +62,6 @@
 									<ul class="currency_selection">
 										<li><a href="/blog/product?cmd=shop">상품리스트</a></li>
 										<li><a href="/blog/product?cmd=register">상품글쓰기</a></li>
-										
-										
 									</ul>
 								</li>
 								<li class="language">
@@ -73,26 +72,25 @@
 									<ul class="language_selection">
 										<li><a href="/blog/board?cmd=home&page=0">게시판리스트</a></li>
 										<li><a href="/blog/board?cmd=write">게시판글쓰기</a></li>
-										
-										
 									</ul>
 								</li>
 								<li class="account">
 									<a href="#">
-										회원리스트         
+										회원리스트
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="account_selection">
-									<c:choose>
+										<c:choose>
 										<c:when test="${empty sessionScope.principal}">
 										<li><a href="user?cmd=login">로그인</a></li>
-										<li><a href="user?cmd=join"></i>회원가입</a></li>
+										<li><a href="user?cmd=join">회원가입</a></li>
 										</c:when>
 										<c:otherwise>
 										<li><a href="user?cmd=logout">로그아웃</a></li>
 										<li><a href="user?cmd=update">회원정보변경</a></li>
 										<li><a href="user?cmd=profileUpload">프로필</a></li>
-										<li><a href="user?cmd=profileUpload">주문내역</a></li>
+										<li><a href="product?cmd=buyselect">주문내역</a></li>
+										<li><a href="product?cmd=basketselect">장바구니</a></li>
 										</c:otherwise>
 									</c:choose>
 									</ul>
@@ -111,12 +109,8 @@
 				<div class="row">
 					<div class="col-lg-12 text-right">
 						<div class="logo_container">
-							<a href="/blog/index.jsp">중고<span>나라</span></a>
+							<a href="#">중고<span>나라</span></a>
 						</div>
-						<div class="container">
-
-	
-	</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
 								<form class="form-inline d-flex justify-center" action="/blog/product?cmd=search">
@@ -125,17 +119,6 @@
   								  <button class="btn btn-success" type="submit">Search</button>
  								 </form>
 						
-							</ul>
-							<ul class="navbar_user">
-								<li><a href="product?cmd=basket"><i class="fa fa-heart" aria-hidden="true"></i></a></li> 
-								<li><a href="product?cmd=chat"><i class="fa fa-bell" aria-hidden="true"></i>
-								<span id="checkout_items" class="checkout_items"></span></a></li>
-<!-- 								<li class="checkout"> -->
-<!-- 									<a href="#"> -->
-<!-- 										<i class="product?cmd=basket" aria-hidden="true"></i> -->
-<!-- 										<span id="checkout_items" class="checkout_items">5</span> -->
-<!-- 									</a> -->
-<!-- 								</li> -->
 							</ul>
 							<div class="hamburger_container">
 								<i class="fa fa-bars" aria-hidden="true"></i>
@@ -147,5 +130,58 @@
 		</div>
 
 	</header>
+
+	<div class="fs_menu_overlay"></div>
+
+	<!-- Hamburger Menu -->
+
+	<div class="hamburger_menu">
+		<div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+		<div class="hamburger_menu_content text-right">
+			<ul class="menu_top_nav">
+				<li class="menu_item has-children">
+					<a href="#">
+						상품
+						<i class="fa fa-angle-down"></i>
+					</a>
+					<ul class="menu_selection">
+						<li><a href="/blog/product?cmd=shop">상품리스트</a></li>
+						<li><a href="/blog/product?cmd=register">상품글쓰기</a></li>
+					</ul>
+				</li>
+				<li class="menu_item has-children">
+					<a href="#">
+						게시판
+						<i class="fa fa-angle-down"></i>
+					</a>
+					<ul class="menu_selection">
+						<li><a href="/blog/board?cmd=home&page=0">게시판리스트</a></li>
+						<li><a href="/blog/board?cmd=write">게시판글쓰기</a></li>
+					</ul>
+				</li>
+				<li class="menu_item has-children">
+					<a href="#">
+						회원리스트
+						<i class="fa fa-angle-down"></i>
+					</a>
+					<ul class="menu_selection">
+						<c:choose>
+										<c:when test="${empty sessionScope.principal}">
+										<li><a href="user?cmd=login">로그인</a></li>
+										<li><a href="user?cmd=join">회원가입</a></li>
+										</c:when>
+										<c:otherwise>
+										<li><a href="user?cmd=logout">로그아웃</a></li>
+										<li><a href="user?cmd=update">회원정보변경</a></li>
+										<li><a href="user?cmd=profileUpload">프로필</a></li>
+										<li><a href="product?cmd=buyselect">주문내역</a></li>
+										<li><a href="product?cmd=basketselect">장바구니</a></li>
+										</c:otherwise>
+									</c:choose>
+					</ul>
+				</li>
+				
+			</ul>
+		</div>
 	</div>
 	<br>
