@@ -127,18 +127,25 @@ public class ReplyRepository {
 	
 	public List<Reply> findAll() {
 		final String SQL = "SELECT * FROM reply";
-		List<Reply> replys = new ArrayList<>();
+		List<Reply> replylist = new ArrayList<>();
 		
 		try {
 			conn = DBConn.getConnection();
 			pstmt = conn.prepareStatement(SQL);
 			// 물음표 완성하기
-			
+			rs = pstmt.executeQuery();
 			// while 돌려서 rs -> java오브젝트에 집어넣기
 			while(rs.next()) {
-				
+				Reply reply = Reply.builder()
+						.id(rs.getInt(1))
+						.userId(rs.getInt(2))
+						.boardId(rs.getInt(3))
+						.content(rs.getString(4))
+						.createDate(rs.getTimestamp(5))
+						.build();
+				replylist.add(reply);
 			}
-			return replys;
+			return replylist;
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(TAG+"findAll : "+e.getMessage());

@@ -22,15 +22,9 @@
 	  		<tr>
 	  		<div class="form-group">
 	  			<td style="width:110px;"><h5>비밀번호</h5></td>
-	  			<td><input onkeyup="passwordCheckFunction()" class="form-control" type="password" id="password" name="password" maxlength="20" placeholder="비밀번호를 입력해주세요"></td>
+	  			<td><input class="form-control" type="password" id="password" name="password" maxlength="20" placeholder="비밀번호를 입력해주세요"></td>
 	  		</div>
-	  		</tr>
-	  		<tr>
-	  		<div class="form-group">
-	  			<td style="width:110px;"><h5>비밀번호 확인</h5></td>
-	  			<td><input onkeyup="passwordCheckFunction()" class="form-control" type="password" id="password2" name="password2" maxlength="20" placeholder="비밀번호를 다시한번 입력해주세요"></td>
-	  		</div>
-	  		</tr>
+	  		</tr>  		
 	  		<tr>
 	  		<div class="form-group">
 	  			<td style="width:110px;"><h5>이메일</h5></td>

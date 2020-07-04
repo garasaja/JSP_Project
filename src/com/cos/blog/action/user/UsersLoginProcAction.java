@@ -61,10 +61,8 @@ public class UsersLoginProcAction implements Action{
 			
 			//Users adminorusers = new Users();
 			if(user.getUserRole().equals("ADMIN") ) {
-				List<Users> userlist = usersRepository.findAll();
-				request.setAttribute("userlist", userlist);
 				
-				Script.href("로그인 성공", "/blog/admin?cmd=userall", response);	
+				Script.href("로그인 성공", "/blog/admin/home.jsp", response);	
 			}else {
 			Script.href("로그인 성공", "/blog/index.jsp", response);
 			}

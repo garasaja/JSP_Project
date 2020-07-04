@@ -66,7 +66,7 @@
 					
 					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
 						<button type="button" class="btn btn-primary" onclick="like(${product.pid},${sessionScope.principal.id})">찜</button>					
-						<button type="button" class="btn btn-secondary" onclick = "location.href ='/blog/product?cmd=chat&pid=${product.pid}'">연락하기</button>
+						<button type="button" class="btn btn-secondary" onclick = "popupChat(${product.pid})">연락하기</button>
 						<button type="button" class="btn btn-success" onclick = "location.href ='/blog/product?cmd=buy&pid=${product.pid}'">바로구매</button>
 					</div>
 				</div>
@@ -76,6 +76,14 @@
 	</div>
 				</div>
 		<script>
+		
+			function popupChat(pid) {
+				
+// 				location.href ='/blog/product?cmd=chat&pid='+pid;
+
+				 window.open("/blog/product?cmd=chat&pid="+pid, "a", "width=700, height=600, left=100, top=50");
+				
+			}
 	
 			function like(pid,userid) {
 				alert("찜목록에 추가되었습니다.");									

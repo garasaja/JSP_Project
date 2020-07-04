@@ -31,6 +31,8 @@ public class ProductRepository {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
+	
+	
 	public int deleteBybasketId(int id) {
 		final String SQL = "DELETE FROM basket WHERE id = ?";
 		
@@ -319,7 +321,7 @@ public class ProductRepository {
 		//sb.append("SELECT /*+ INDEX_DESC(product SYS_C007969)*/pid,");
 		sb.append("puserId, ptitle, pcontent, preadCount, pcreateDate, pcategory, pplace, pprice, pprofile ");
 		sb.append("FROM product ");
-		sb.append("WHERE ptitle like ? OR pcontent like ? or pprofile like ?");
+		sb.append("WHERE ptitle like ? OR pplace like ? or pcategory like ?");
 		
 		//System.out.println(sb.toString());
 		final String SQL = sb.toString();
@@ -463,6 +465,42 @@ public class ProductRepository {
 		return null;
 	}
 	
+	public List<Product> findAll() {
+		final String SQL = "SELECT pid,puserid,ptitle,pcategory,pplace,pcontent,preadcount,pcreateDate,pprofile,pprice FROM product ORDER BY pid DESC";
+		List<Product> productlist = new ArrayList<>();
+		
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Product product = Product.builder()
+						.pid(rs.getInt(1))
+						.puserId(rs.getInt(2))
+						.ptitle(rs.getString(3))
+						.pcategory(rs.getString(4))
+						.pplace(rs.getString(5))
+						.pcontent(rs.getString(6))
+						.preadCount(rs.getInt(7))
+						.pcreateDate(rs.getTimestamp(8))
+						.pprofile(rs.getString(9))
+						.pprice(rs.getInt(10))
+						.build();
+				
+				productlist.add(product);
+			}
+			
+			return productlist;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(TAG+"findAll : "+e.getMessage());
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+
+		return null;
+	}
+	
 	public List<Product> likeAll() {
 		final String SQL = "SELECT pid,puserid,ptitle,pcategory,pplace,pcontent,preadcount,pcreateDate,pprofile,pprice FROM product ORDER BY pid DESC";
 		List<Product> productlist = new ArrayList<>();
@@ -499,9 +537,10 @@ public class ProductRepository {
 		return null;
 	}
 	
-	public List<Product> findAll() {
-		final String SQL = "SELECT pid,puserid,ptitle,pcategory,pplace,pcontent,preadcount,pcreateDate,pprofile,pprice FROM product ORDER BY pid DESC";
-		List<Product> productlist = new ArrayList<>();
+	/*public List<BasketResponseDto> findAll() {
+		final String SQL = "SELECT b.id, b.userId, b.productId,p.ptitle, p.pcategory, p.pplace, p.pprice, p.pprofile FROM basket b INNER JOIN product p ON b.productid = p.pid";
+		//final String SQL = "SELECT pid,puserid,ptitle,pcategory,pplace,pcontent,preadcount,pcreateDate,pprofile,pprice FROM product ORDER BY pid DESC";
+		List<BasketResponseDto> productlist = new ArrayList<>();
 		
 		try {
 			conn = DBConn.getConnection();
@@ -533,7 +572,7 @@ public class ProductRepository {
 		}
 
 		return null;
-	}
+	}*/
 	
 	
 	

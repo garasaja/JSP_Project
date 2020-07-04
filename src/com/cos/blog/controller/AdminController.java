@@ -10,7 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.cos.blog.action.Action;
+import com.cos.blog.action.admin.AdminBoardAction;
+import com.cos.blog.action.admin.AdminBoardDeleteAction;
+import com.cos.blog.action.admin.AdminProductAction;
+import com.cos.blog.action.admin.AdminProductDeleteAction;
+import com.cos.blog.action.admin.AdminReplyAction;
+import com.cos.blog.action.admin.AdminReplyDeleteAction;
 import com.cos.blog.action.admin.AdminUserAction;
+import com.cos.blog.action.admin.AdminUserDeleteAction;
 
 
 // http://localhost:8000/blog/user
@@ -42,9 +49,25 @@ public class AdminController extends HttpServlet {
 	}
 	
 	public Action router(String cmd) {
-		if(cmd.equals("userall")) {
-			// 회원가입 페이지로 이동
+		if(cmd.equals("user")) {
 			return new AdminUserAction();
+			
+		}else if(cmd.equals("reply")) {
+			return new AdminReplyAction();
+			
+		}else if(cmd.equals("product")) {
+			return new AdminProductAction();
+			
+		}else if(cmd.equals("board")) {
+			return new AdminBoardAction();
+		}else if(cmd.equals("boarddelete")) {
+			return new AdminBoardDeleteAction();
+		}else if(cmd.equals("replydelete")) {
+			return new AdminReplyDeleteAction();
+		}else if(cmd.equals("userdelete")) {
+			return new AdminUserDeleteAction();
+		}else if(cmd.equals("productdelete")) {
+			return new AdminProductDeleteAction();
 		}
 		return null;
 	}

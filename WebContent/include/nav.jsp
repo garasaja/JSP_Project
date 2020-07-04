@@ -109,13 +109,13 @@
 				<div class="row">
 					<div class="col-lg-12 text-right">
 						<div class="logo_container">
-							<a href="#">중고<span>나라</span></a>
+							<a href="home.jsp">중고<span>나라</span></a>
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
 								<form class="form-inline d-flex justify-center" action="/blog/product?cmd=search">
 								<input type="hidden" name="cmd" value="search" />
-  								  <input class="form-control mr-sm-2" type="text" name="keyword" placeholder="상품을 검색해주세요">
+  								  <input class="form-control mr-sm-2" type="text" name="keyword" placeholder="상품(카테고리) 또는 내용을 검색해주세요" style="width: 500px" height="200px">
   								  <button class="btn btn-success" type="submit">Search</button>
  								 </form>
 						

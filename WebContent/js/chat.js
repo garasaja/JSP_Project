@@ -48,8 +48,6 @@ function chatWrite(pid, userid){
 				$("#chat__list").append(string);
 				
 			}
-			
-//			renderReplyList(result, userid);
 			$("#chat__write__form").val("");
 		}
 	}).fail(function(error){
