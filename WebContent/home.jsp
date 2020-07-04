@@ -2,7 +2,7 @@
 <%@page import="com.cos.blog.model.Users"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="include/nav.jsp"%>
+<%@ include file="../include/nav.jsp"%>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <div class="container">
 
@@ -33,8 +33,8 @@
 
 	<br />
 
-	<%@ include file="include/paging.jsp"%>
+	<%@ include file="../include/paging.jsp"%>
 
 </div>
 
-<%@ include file="include/footer.jsp"%>
+<%@ include file="../include/footer.jsp"%>

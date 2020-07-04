@@ -36,6 +36,7 @@
       <th><button onclick= "location.href='/blog/admin?cmd=user'">userlist</button></th>
       <th><button onclick= "location.href='/blog/admin?cmd=board'">boardlist</button></th>
       <th><button onclick= "location.href='/blog/admin?cmd=reply'">replylist</button></th>
+      <th><button onclick= "location.href='/blog/admin?cmd=product'">productlist</button></th>
        
     </tr>
   </thead>
@@ -88,8 +89,9 @@ function deleteById(productId){
 	}).done(function(result){
 		if(result == "1"){
 			alert("댓글 삭제 성공");
-			var productItem = $("#product-"+productId);
-			productItem.remove();
+			//var productItem = $("#product-"+productId);
+			//productItem.remove();
+			location.reload();
 		}else{
 			alert("댓글 삭제 실패");
 		}

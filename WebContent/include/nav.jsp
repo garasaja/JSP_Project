@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <title>중고사랑 나라사랑</title>
 <meta charset="utf-8">
@@ -109,7 +109,7 @@
 				<div class="row">
 					<div class="col-lg-12 text-right">
 						<div class="logo_container">
-							<a href="home.jsp">중고<span>나라</span></a>
+							<a href="index.jsp">중고<span>나라</span></a>
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
