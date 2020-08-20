@@ -6,7 +6,7 @@
 	<div class="d-flex justify-content-center">
 		<form action="/blog/user?cmd=profileUploadProc" method="post" enctype="multipart/form-data">
 			<div class="form-group">
-				<img id="img__wrap" onerror="this.src='/blog/image/userProfile.png'" src="${sessionScope.principal.userProfile}" width="350px" height="300px" />
+				<img id="img__wrap" onerror="this.src='/blog/image/userProfile.jpg'" src="${sessionScope.principal.userProfile}" width="350px" height="300px" />
 			</div>
 			<div class="form-group bg-light">
 				<input type="file" name="userProfile" id="img__preview" />
